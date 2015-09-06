@@ -28,17 +28,22 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase
     {
 
         $stubProfile = $this->getMockBuilder('IProfileDao')
-                            ->getMock();
+                    ->getMock();
         $stubProfile->method('GetPassword')
-                     ->willReturn('91');
+                    ->willReturn('91');
 
         $stubToken = $this->getMockBuilder('IToken')
-                            ->getMock();
+                    ->getMock();
         $stubToken->method('GetRandom')
                     ->willReturn('000000');
 
         $stubLog = $this->getMockBuilder('ILog')
-                            ->getMock();
+                    ->setMethods(array('Save'))
+                    ->getMock();
+
+        $stubLog->expects($this->once())
+                ->method('Save')
+                ->with($this->stringContains('joey'));
 
         $target = new AuthenticationService($stubProfile, $stubToken, $stubLog);
 

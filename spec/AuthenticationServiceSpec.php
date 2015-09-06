@@ -27,10 +27,9 @@ class AuthenticationServiceSpec extends ObjectBehavior
         $this->IsValid("joey", "91000000")->shouldReturn(true);
     }
 
-    function it_can_logged_when_password_error()
+    function it_can_logged_when_password_error(ILog $log)
     {
-
-        $this->IsValid("joey", "91000000");
+        $log->Save('account:joey try to login failed')->shouldBeCalled();
         $this->IsValid("joey", "wrong number");
 
     }
