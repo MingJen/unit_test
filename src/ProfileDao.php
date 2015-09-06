@@ -1,5 +1,5 @@
 <?php
-class ProfileDao
+class ProfileDao implements IProfileDao
 {
     public function GetPassword($account)
     {

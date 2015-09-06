@@ -1,6 +1,6 @@
 <?php
 
-class RsaTokenDao
+class RsaTokenDao implements IToken
 {
     public function GetRandom($account)
     {
