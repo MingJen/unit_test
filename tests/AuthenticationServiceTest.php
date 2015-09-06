@@ -3,8 +3,16 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase
 {
     public function testIsValidTest()
     {
-        $stubProfile = new StubProfileDao();
-        $stubToken = new StubTokenDao();
+        $stubProfile = $this->getMockBuilder('IProfileDao')
+                            ->getMock();
+        $stubProfile->method('GetPassword')
+                     ->willReturn('91');
+
+        $stubToken = $this->getMockBuilder('IToken')
+                            ->getMock();
+        $stubToken->method('GetRandom')
+                    ->willReturn('000000');
+
 
         $target = new AuthenticationService($stubProfile, $stubToken);
 
@@ -12,20 +20,5 @@ class AuthenticationServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($actual);
 
-    }
-}
-
-class StubTokenDao implements IToken
-{
-    public function GetRandom($account){
-        return '000000';
-    }
-}
-
-class StubProfileDao implements IProfileDao
-{
-    public function GetPassword($account)
-    {
-        return '91';
     }
 }

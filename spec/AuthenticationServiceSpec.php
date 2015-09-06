@@ -9,10 +9,10 @@ use IToken;
 
 class AuthenticationServiceSpec extends ObjectBehavior
 {
-    function let()
+    function let(IProfileDao $stubProfile, IToken $stubToken)
     {
-        $stubProfile = new StubProfileDao();
-        $stubToken = new StubTokenDao();
+        $stubProfile->GetPassword('joey')->willReturn('91');
+        $stubToken->GetRandom('joey')->willReturn('000000');
         $this->beConstructedWith($stubProfile, $stubToken);
     }
 
@@ -24,20 +24,5 @@ class AuthenticationServiceSpec extends ObjectBehavior
     function it_can_valid_account_password()
     {
         $this->IsValid("joey", "91000000")->shouldReturn(true);
-    }
-}
-
-class StubTokenDao implements IToken
-{
-    public function GetRandom($account){
-        return '000000';
-    }
-}
-
-class StubProfileDao implements IProfileDao
-{
-    public function GetPassword($account)
-    {
-        return '91';
     }
 }
