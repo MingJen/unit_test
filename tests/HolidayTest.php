@@ -4,6 +4,7 @@ class HolidayTest extends PHPUnit_Framework_TestCase
     public function testIsTodayXmasTest_假如今天是聖誕節_應回傳MerryXmas()
     {
         $holiday = new Holiday();
+        $holiday->setToday(new DateTime('2015-12-25'));
 
         $expected = "Merry Xmas!!";
 
