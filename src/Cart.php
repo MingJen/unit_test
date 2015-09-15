@@ -10,7 +10,12 @@ class Cart
 
     public function checkout()
     {
-        return 100;
+        $sum = 0;
+        foreach ($this->collection as $product) {
+            $sum += $product->getPrice();
+        }
+
+        return $sum;
     }
 
     public function count()

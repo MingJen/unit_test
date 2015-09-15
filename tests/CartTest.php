@@ -14,15 +14,22 @@ class CartTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $actual);
     }
 
-    // public function test第一集買了一本，其他都沒買，價格應為100X1()
-    // {
-    //     $target = new Cart();
+    public function test第一集買了一本，其他都沒買，價格應為100X1()
+    {
+        $stubProduct = $this->getMockBuilder('Product')
+            ->getMock();
 
-    //     $actual = $target->checkout();
+        $stubProduct->method('getPrice')
+             ->willReturn(100);
 
-    //     $this->assertEquals(100, $actual);
 
-    // }
+        $target = new Cart($stubProduct);
+
+        $actual = $target->checkout();
+
+        $this->assertEquals(100, $actual);
+
+    }
 
     // public function test第一集買了一本，第二集也買了一本，95折，共195()
     // {
