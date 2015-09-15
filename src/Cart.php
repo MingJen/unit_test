@@ -21,6 +21,10 @@ class Cart
         if (count($this->collection) == 2) {
             return $sum * 0.95;
         }
+
+        if (count($this->collection) == 3) {
+            return $sum * 0.9;
+        }
         return $sum;
     }
 
