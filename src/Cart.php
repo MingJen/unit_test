@@ -14,11 +14,15 @@ class Cart
     public function checkout()
     {
         $sum = 0;
+        $no_discount = 0;
         foreach ($this->collection as $product) {
-            $sum += $product->getPrice() * $product->getQty();
+            $sum += $product->getPrice();
+            if ($product->getQty() == 2) {
+                $no_discount = $product->getPrice();
+            }
         }
 
-        return $sum * $this->getDiscount(count($this->collection));
+        return $sum * $this->getDiscount(count($this->collection)) + $no_discount;
     }
 
     public function count()
