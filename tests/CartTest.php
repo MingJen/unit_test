@@ -1,20 +1,28 @@
 <?php
 class CartTest extends PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        $this->stubProduct1 = $this->getMockBuilder('Product')
+            ->getMock();
+        $this->stubProduct1->method('getPrice')
+             ->willReturn(100);
+
+        $this->stubProduct2 = $this->getMockBuilder('Product')
+            ->getMock();
+        $this->stubProduct2->method('getPrice')
+             ->willReturn(100);
+
+        $this->stubProduct3 = $this->getMockBuilder('Product')
+            ->getMock();
+        $this->stubProduct3->method('getPrice')
+             ->willReturn(100);
+    }
 
     public function test可以將商品放入購物車()
     {
-        $stubProduct = $this->getMockBuilder('Product')
-            ->getMock();
-        $stubProduct->method('getPrice')
-             ->willReturn(100);
 
-        $stubProduct2 = $this->getMockBuilder('Product')
-            ->getMock();
-        $stubProduct2->method('getPrice')
-             ->willReturn(100);
-
-        $target = new Cart([$stubProduct, $stubProduct2]);
+        $target = new Cart([$this->stubProduct1, $this->stubProduct2]);
 
         $actual = $target->count();
 
@@ -30,7 +38,7 @@ class CartTest extends PHPUnit_Framework_TestCase
              ->willReturn(100);
 
 
-        $target = new Cart($stubProduct);
+        $target = new Cart($this->stubProduct1);
 
         $actual = $target->checkout();
 
@@ -40,18 +48,8 @@ class CartTest extends PHPUnit_Framework_TestCase
 
     public function test第一集買了一本，第二集也買了一本，95折，共190()
     {
-        $stubProduct = $this->getMockBuilder('Product')
-            ->getMock();
-        $stubProduct->method('getPrice')
-             ->willReturn(100);
 
-        $stubProduct2 = $this->getMockBuilder('Product')
-            ->getMock();
-        $stubProduct2->method('getPrice')
-             ->willReturn(100);
-
-
-        $target = new Cart([$stubProduct, $stubProduct2]);
+        $target = new Cart([$this->stubProduct1, $this->stubProduct2]);
 
         $actual = $target->checkout();
 
@@ -60,23 +58,8 @@ class CartTest extends PHPUnit_Framework_TestCase
 
     public function test一二三集各買了一本，9折_共270()
     {
-        $stubProduct = $this->getMockBuilder('Product')
-            ->getMock();
-        $stubProduct->method('getPrice')
-             ->willReturn(100);
 
-        $stubProduct2 = $this->getMockBuilder('Product')
-            ->getMock();
-        $stubProduct2->method('getPrice')
-             ->willReturn(100);
-
-        $stubProduct3 = $this->getMockBuilder('Product')
-            ->getMock();
-        $stubProduct3->method('getPrice')
-             ->willReturn(100);
-
-
-        $target = new Cart([$stubProduct, $stubProduct2, $stubProduct3]);
+        $target = new Cart([$this->stubProduct1, $this->stubProduct2, $this->stubProduct3]);
 
         $actual = $target->checkout();
 
