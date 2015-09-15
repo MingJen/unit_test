@@ -40,6 +40,10 @@ class Cart
             return 0.8;
         }
 
+        if (count($this->collection) == 5) {
+            return 0.75;
+        }
+
         return 1;
     }
 }
