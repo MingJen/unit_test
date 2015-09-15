@@ -18,7 +18,7 @@ class Cart
             $sum += $product->getPrice() * $product->getQty();
         }
 
-        return $sum * $this->getDiscount();
+        return $sum * $this->getDiscount(count($this->collection));
     }
 
     public function count()
@@ -26,21 +26,21 @@ class Cart
         return count($this->collection);
     }
 
-    private function getDiscount()
+    private function getDiscount($totalKind)
     {
-        if (count($this->collection) == 2) {
+        if ($totalKind == 2) {
             return 0.95;
         }
 
-        if (count($this->collection) == 3) {
+        if ($totalKind == 3) {
             return 0.9;
         }
 
-        if (count($this->collection) == 4) {
+        if ($totalKind == 4) {
             return 0.8;
         }
 
-        if (count($this->collection) == 5) {
+        if ($totalKind == 5) {
             return 0.75;
         }
 
