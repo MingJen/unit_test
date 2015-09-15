@@ -118,4 +118,26 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(370, $actual);
     }
+
+    public function test_第一集買了一本，第二三集各買了兩本，價格應為100乘3再打9折，加100乘2再打95折，共460()
+    {
+        $this->stubProduct2 = $this->getMockBuilder('Product')
+            ->getMock();
+        $this->stubProduct2->method('getPrice')
+             ->willReturn(100);
+        $this->stubProduct2->method('getQty')
+             ->willReturn(2);
+
+        $this->stubProduct3 = $this->getMockBuilder('Product')
+            ->getMock();
+        $this->stubProduct3->method('getPrice')
+             ->willReturn(100);
+        $this->stubProduct3->method('getQty')
+             ->willReturn(2);
+        $target = new Cart([$this->stubProduct1, $this->stubProduct2, $this->stubProduct3]);
+
+        $actual = $target->checkout();
+
+        $this->assertEquals(460, $actual);
+    }
 }

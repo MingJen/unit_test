@@ -15,14 +15,17 @@ class Cart
     {
         $sum = 0;
         $no_discount = 0;
+        $no_discount_kind = 0;
+
         foreach ($this->collection as $product) {
             $sum += $product->getPrice();
             if ($product->getQty() == 2) {
-                $no_discount = $product->getPrice();
+                $no_discount+= $product->getPrice();
+                $no_discount_kind += 1;
             }
         }
 
-        return $sum * $this->getDiscount(count($this->collection)) + $no_discount;
+        return $sum * $this->getDiscount(count($this->collection)) + $no_discount * $this->getDiscount($no_discount_kind);
     }
 
     public function count()
