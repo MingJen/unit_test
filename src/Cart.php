@@ -18,6 +18,9 @@ class Cart
             $sum += $product->getPrice();
         }
 
+        if (count($this->collection) == 2) {
+            return $sum * 0.95;
+        }
         return $sum;
     }
 

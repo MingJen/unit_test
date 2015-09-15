@@ -38,7 +38,7 @@ class CartTest extends PHPUnit_Framework_TestCase
 
     }
 
-    public function test第一集買了一本，第二集也買了一本，95折，共195()
+    public function test第一集買了一本，第二集也買了一本，95折，共190()
     {
         $stubProduct = $this->getMockBuilder('Product')
             ->getMock();
@@ -55,7 +55,7 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         $actual = $target->checkout();
 
-        $this->assertEquals(195, $actual);
+        $this->assertEquals(190, $actual);
     }
 
 }
