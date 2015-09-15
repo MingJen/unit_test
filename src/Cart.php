@@ -5,6 +5,9 @@ class Cart
 
     public function __construct($product)
     {
+        if (is_array($product)) {
+            return array_map([$this, __FUNCTION__], $product);
+        }
         $this->collection[] = $product;
     }
 
