@@ -5,4 +5,9 @@ class Product
     {
 
     }
+
+    public function getQty()
+    {
+
+    }
 }

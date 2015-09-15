@@ -15,7 +15,7 @@ class Cart
     {
         $sum = 0;
         foreach ($this->collection as $product) {
-            $sum += $product->getPrice();
+            $sum += $product->getPrice() * $product->getQty();
         }
 
         return $sum * $this->getDiscount();
