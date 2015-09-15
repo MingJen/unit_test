@@ -17,6 +17,11 @@ class CartTest extends PHPUnit_Framework_TestCase
             ->getMock();
         $this->stubProduct3->method('getPrice')
              ->willReturn(100);
+
+        $this->stubProduct4 = $this->getMockBuilder('Product')
+            ->getMock();
+        $this->stubProduct4->method('getPrice')
+             ->willReturn(100);
     }
 
     public function test可以將商品放入購物車()
@@ -64,5 +69,14 @@ class CartTest extends PHPUnit_Framework_TestCase
         $actual = $target->checkout();
 
         $this->assertEquals(270, $actual);
+    }
+
+    public function test_一二三四集各買了一本，_8折_共320()
+    {
+        $target = new Cart([$this->stubProduct1, $this->stubProduct2, $this->stubProduct3, $this->stubProduct4]);
+
+        $actual = $target->checkout();
+
+        $this->assertEquals(320, $actual);
     }
 }
