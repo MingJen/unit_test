@@ -13,19 +13,19 @@ class Cart
 
     public function checkout()
     {
-        $sum = 0;
-        $no_discount = 0;
-        $no_discount_kind = 0;
-
-        foreach ($this->collection as $product) {
-            $sum += $product->getPrice();
-            if ($product->getQty() == 2) {
-                $no_discount+= $product->getPrice();
-                $no_discount_kind += 1;
+        $group = array();
+        foreach ($this->collection as $key => $product) {
+            for ($i=1; $i <= $product->getQty(); $i++) {
+                $group[$i][] = $product->getPrice();
             }
         }
 
-        return $sum * $this->getDiscount(count($this->collection)) + $no_discount * $this->getDiscount($no_discount_kind);
+        $result = 0;
+        foreach ($group as $key => $items) {
+            $result += array_sum($items) * $this->getDiscount(count($items));
+        }
+
+        return $result;
     }
 
     public function count()
