@@ -18,18 +18,24 @@ class Cart
             $sum += $product->getPrice();
         }
 
-        if (count($this->collection) == 2) {
-            return $sum * 0.95;
-        }
-
-        if (count($this->collection) == 3) {
-            return $sum * 0.9;
-        }
-        return $sum;
+        return $sum * $this->getDiscount();
     }
 
     public function count()
     {
         return count($this->collection);
+    }
+
+    private function getDiscount()
+    {
+        if (count($this->collection) == 2) {
+            return 0.95;
+        }
+
+        if (count($this->collection) == 3) {
+            return 0.9;
+        }
+
+        return 1;
     }
 }
